@@ -1,0 +1,13 @@
+h2 Add App
+label(for='name') Name
+input(ng-model='form.name', name='name')
+p Description:
+textarea(ng-model='form.description', cols='50', rows='15')
+
+p iOS id
+input(ng-model='form.appleId', name='appleId')
+p Android id
+input(ng-model='form.googleId', name='googleId')
+
+p
+  button(ng-click='addApp()') Add app

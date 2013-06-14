@@ -1,0 +1,5 @@
+h3 {{app.name}}
+div {{app.description}}
+div(ng-repeat='review in reviews')
+  h3 {{review.name}}
+  a(href='app/{{app.id}}review/{{review.id}}') View

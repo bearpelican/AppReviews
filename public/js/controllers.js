@@ -65,7 +65,7 @@ function ReviewsCtrl($scope, $http, $location, $routeParams) {
 }
 
 function ReviewCtrl($scope, $http, $location, $routeParams) {
-    $http.get('api/app/' + $routeParams.appId + '/review').
+    $http.get('/api/review/' + $routeParams.id).
 	success(function(data) {
 	    $scope.review = data.review;
 	});

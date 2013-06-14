@@ -1,0 +1,10 @@
+p There are {{apps.length}} apps
+div(ng-repeat='app in apps')
+  h3{{app.name}}
+  div {{app.description}}
+  a(href='app/{{app.id}}/reviews') Show Reviews
+  |  - 
+  a(href='editApp/{{app.id}}') Edit
+  |  -
+  a(href='deleteApp/{{app.id}}') Delete
+    
