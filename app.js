@@ -35,8 +35,17 @@ app.get('/partials/:name', routes.partials);
 
 // JSON API
 
-app.get('/api/name', api.name);
+app.get('/api/apps', api.apps);
 
+app.get('/api/app/:id', api.app);
+app.post('/api/app', api.addApp);
+app.put('/api/app/:id', api.editApp);
+app.delete('/api/app/:id', api.deleteApp);
+
+// Reviews
+
+app.get('/api/app/:id/reviews', api.reviews);
+app.get('/api/review/:id', api.review)
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 
