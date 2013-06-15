@@ -14,13 +14,17 @@ db.once('open', function callback () {
 
 var reviewSchema = mongoose.Schema({
     title: String,
+    comment: String,
+    authorName: String,
+    authorId: String,
     rating: Number,
     date: Date,
     url: String,
     platform: String,
     version: String,
     country: String,
-    appName: { type:String, ref: 'App'}
+    appName: { type:String, ref: 'App'},
+    appID: { type: mongoose.Schema.Types.ObjectId, ref: 'App' }
 })
 
 var appSchema = mongoose.Schema({
@@ -56,6 +60,7 @@ exports.app = function (req, res) {
 
 // POST
 exports.addApp = function (req, res) {
+    console.log("adding app: " + req);
     var app = new App(req.body);
     app.save(function (err) {
 	if (err) return handleError(err);

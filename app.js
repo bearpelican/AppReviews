@@ -33,6 +33,10 @@ app.configure('production', function(){
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
+
+
+app.get('/json/apps', api.apps);
+
 // JSON API
 
 app.get('/api/apps', api.apps);
@@ -45,7 +49,8 @@ app.delete('/api/app/:id', api.deleteApp);
 // Reviews
 
 app.get('/api/app/:id/reviews', api.reviews);
-app.get('/api/review/:id', api.review)
+app.get('/api/review/:id', api.review);
+app.post('/api/review', api.addReview)
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 

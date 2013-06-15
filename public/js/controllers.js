@@ -11,9 +11,10 @@ function IndexCtrl($scope, $http) {
 
 function AddAppCtrl($scope, $http, $location) {
     $scope.form = {};
-    $scope.submitApp = function () {
+    $scope.addApp = function () {
 	$http.post('/api/app', $scope.form).
 	    success(function(data) {
+		console.log('adding data ' + $scope.form);
 		$location.path('/');
 	    });
     };
