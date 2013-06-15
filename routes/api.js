@@ -30,8 +30,8 @@ var reviewSchema = mongoose.Schema({
 var appSchema = mongoose.Schema({
     name: String,
     description: String,
-    iosAppID: String,
-    androidAppID: String,
+    iosID: String,
+    androidID: String,
     reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
 })
 

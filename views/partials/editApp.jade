@@ -1,12 +1,12 @@
 h2 Edit App
 label(for='name') Name
-input(ng-model='form.name', name='title')
+input(ng-model='form.name', name='name')
 p Description:
 textarea(ng-model='form.description', cols='50', rows='15')
 
 p iOS id
-input(ng-model='form.appleId', name='appleId')
+input(ng-model='form.iosId', name='iosId')
 p Android id
-input(ng-model='form.googleId', name='googleId')
+input(ng-model='form.androidId', name='androidId')
 p
   button(ng-click='editApp()') Edit app
