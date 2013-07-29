@@ -9,10 +9,10 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
 	controller: IndexCtrl
     });
     $routeProvider.when('/addApp', {templateUrl: 'partials/addApp', controller: AddAppCtrl});
-    $routeProvider.when('/app/:id/reviews', {templateUrl: 'partials/reviews', controller: ReviewsCtrl});
-    $routeProvider.when('/editApp/:id', {templateUrl: 'partials/editApp', controller: EditAppCtrl});
-    $routeProvider.when('/deleteApp/:id', {templateUrl: 'partials/deleteApp', controller: DeleteAppCtrl});
-    $routeProvider.when('/review/:id', {templateUrl: 'partials/review', controller: ReviewCtrl});
+    $routeProvider.when('/app/:_id/reviews', {templateUrl: 'partials/reviews', controller: ReviewsCtrl});
+    $routeProvider.when('/editApp/:_id', {templateUrl: 'partials/editApp', controller: EditAppCtrl});
+    $routeProvider.when('/deleteApp/:_id', {templateUrl: 'partials/deleteApp', controller: DeleteAppCtrl});
+    $routeProvider.when('/review/:_id', {templateUrl: 'partials/review', controller: ReviewCtrl});
 //    $routeProvider.otherwise({redirectTo: '/'});
     $locationProvider.html5Mode(true);
   }]);

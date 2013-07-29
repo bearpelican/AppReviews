@@ -41,16 +41,17 @@ app.get('/json/apps', api.apps);
 
 app.get('/api/apps', api.apps);
 
-app.get('/api/app/:id', api.app);
+app.get('/api/app/:_id', api.app);
 app.post('/api/app', api.addApp);
-app.put('/api/app/:id', api.editApp);
-app.delete('/api/app/:id', api.deleteApp);
+app.put('/api/app/:_id', api.editApp);
+app.delete('/api/app/:_id', api.deleteApp);
 
 // Reviews
 
-app.get('/api/app/:id/reviews', api.reviews);
-app.get('/api/review/:id', api.review);
-app.post('/api/review', api.addReview)
+app.get('/api/app/:_id/reviews', api.reviews);
+app.get('/api/review/:_id', api.review);
+app.post('/api/review', api.addReview);
+app.post('/api/reviews', api.addReviews);
 // redirect all others to the index (HTML5 history)
 app.get('*', routes.index);
 

@@ -1,5 +1,7 @@
 h3 {{app.name}}
 div {{app.description}}
 div(ng-repeat='review in reviews')
-  h3 {{review.name}}
-  a(href='app/{{app.id}}review/{{review.id}}') View
+  h3 {{review.title}}
+  h3 {{review.comment}}
+  h3 {{review.rating}}
+  a(href='app/{{app._id}}review/{{review._id}}') View
