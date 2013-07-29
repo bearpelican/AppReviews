@@ -1,0 +1,3 @@
+Using /usr/local/rvm/gems/jruby-1.6.7.2
+Running /usr/local/rvm/hooks/after_use
+Neither md5 nor md5sum were found in the PATH

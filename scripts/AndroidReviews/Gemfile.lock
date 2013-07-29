@@ -1,0 +1,22 @@
+GEM
+  specs:
+    flowdock (0.2.2)
+      httparty (~> 0.7)
+      multi_json
+    httparty (0.9.0)
+      multi_json (~> 1.0)
+      multi_xml
+    json (1.5.0-java)
+    json-jruby (1.5.0-java)
+      json (= 1.5.0)
+    multi_json (1.5.0)
+    multi_xml (0.5.1)
+    supermarket (0.0.5-java)
+      json-jruby
+
+PLATFORMS
+  java
+
+DEPENDENCIES
+  flowdock
+  supermarket
