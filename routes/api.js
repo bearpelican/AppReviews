@@ -152,14 +152,23 @@ exports.reviews = function (req, res) {
 	})
 	
     })
-/*    App.findById(id).populate('reviews').exec(function (err, app) {
-	if (err) return handleError(err);
-	res.json({
-	    app: app,
-	    reviews: app.reviews
-	});
-    });*/
 };
+
+exports.pageReviews = function (req, res) {
+    var id = req.params._id;
+    var review_id = req.params.after;
+    App.findById(id, function (err, app) {
+	Review.find({'appId': id, _id : { $gte : review_id } }).limit(10).exec(function (err, reviews) {
+	    if (err) return handleError(err);
+	    res.json({
+		reviews: reviews,
+		app: app
+	    })
+	})
+	
+    })
+};
+
 
 exports.addReview = function (req, res) {
     var review = new Review(req.body);

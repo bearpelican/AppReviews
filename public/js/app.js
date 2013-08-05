@@ -13,6 +13,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
     $routeProvider.when('/editApp/:_id', {templateUrl: 'partials/editApp', controller: EditAppCtrl});
     $routeProvider.when('/deleteApp/:_id', {templateUrl: 'partials/deleteApp', controller: DeleteAppCtrl});
     $routeProvider.when('/review/:_id', {templateUrl: 'partials/review', controller: ReviewCtrl});
+    $routeProvider.when('/app/:_id/pageReviews', {templateUrl: 'partials/pageReviews', controller: PageReviewsCtrl});
 //    $routeProvider.otherwise({redirectTo: '/'});
     $locationProvider.html5Mode(true);
   }]);

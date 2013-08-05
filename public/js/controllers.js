@@ -66,9 +66,19 @@ function ReviewsCtrl($scope, $http, $location, $routeParams) {
 	});
 }
 
+function PageReviewsCtrl($scope, PageReviews) {
+    $scope.reviews = new PageReviews();
+};
+
 function ReviewCtrl($scope, $http, $location, $routeParams) {
     $http.get('/api/review/' + $routeParams._id).
 	success(function(data) {
 	    $scope.review = data.review;
 	});
 }
+
+
+function ReviewsScrollCtrl($scope, $http, $location, $routeParams) {
+    $http.get('/api/app/' + $routeParams)
+}
+
