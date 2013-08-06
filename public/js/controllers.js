@@ -67,7 +67,7 @@ function ReviewsCtrl($scope, $http, $location, $routeParams) {
 }
 
 function PageReviewsCtrl($scope, PageReviews) {
-    $scope.reviews = new PageReviews();
+    $scope.pageReviews = new PageReviews();
 };
 
 function ReviewCtrl($scope, $http, $location, $routeParams) {

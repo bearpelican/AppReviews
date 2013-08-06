@@ -12,7 +12,7 @@ var myApp angular.module('myApp.services', ['infinite-scroll']);
 
 myApp.factory('PageReviews', function($http, $routeParams)) {
     var PageReviews = function() {
-	this.reviews = [];
+	this.pageReviews = [];
 	this.busy = false;
 	this.after = '';
     };
@@ -22,9 +22,9 @@ myApp.factory('PageReviews', function($http, $routeParams)) {
 	this.busy = true;
 	var url = '/api/app/' + $routeParams._id + '/pageReviews?after=' + this.after;
 	$http.get(url).success(function(data) {
-	    var reviews = data.review;
-	    this.reviews.push.apply(this.reviews, reviews);
-	    this.after = this.reviews[this.reviews.length - 1].id;
+	    var pageReviews = data.pageReviews;
+	    this.pageReviews.push.apply(this.pageReviews, pageReviews);
+	    this.after = this.pageReviews[this.pageReviews.length - 1].id;
 	    this.busy = false;
 	}.bind(this));
     };
