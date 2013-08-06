@@ -5,11 +5,12 @@
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
-angular.module('myApp.services', []).
-  value('version', '0.1');
+var myApp = angular.module('myApp.services', []);
 
-var myApp angular.module('myApp.services', ['infinite-scroll']);
+myApp.value('version', '0.1');
 
+//var myApp angular.module('myApp.services', ['infinite-scroll']);
+/*
 myApp.factory('PageReviews', function($http, $routeParams)) {
     var PageReviews = function() {
 	this.pageReviews = [];
@@ -30,3 +31,5 @@ myApp.factory('PageReviews', function($http, $routeParams)) {
     };
     return PageReviews;
 }
+*/
+

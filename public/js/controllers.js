@@ -77,8 +77,3 @@ function ReviewCtrl($scope, $http, $location, $routeParams) {
 	});
 }
 
-
-function ReviewsScrollCtrl($scope, $http, $location, $routeParams) {
-    $http.get('/api/app/' + $routeParams)
-}
-

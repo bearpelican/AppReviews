@@ -161,7 +161,7 @@ exports.pageReviews = function (req, res) {
 	Review.find({'appId': id, _id : { $gte : review_id } }).limit(10).exec(function (err, reviews) {
 	    if (err) return handleError(err);
 	    res.json({
-		reviews: reviews,
+		pageReviews: reviews,
 		app: app
 	    })
 	})
