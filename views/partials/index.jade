@@ -2,6 +2,8 @@ p There are {{apps.length}} apps
 div(ng-repeat='app in apps')
   h3{{app.name}}
   div {{app.description}}
+  a(href='app/{{app._id}}/pageReviews') Page Reviews
+  |  -
   a(href='app/{{app._id}}/reviews') Show Reviews
   |  - 
   a(href='editApp/{{app._id}}') Edit

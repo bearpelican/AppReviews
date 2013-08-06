@@ -1,5 +1,7 @@
-div(ng-app='myApp.services' ng-controller='PageReviewsCtrl')
-  div(infinite-scroll='pageReviews.nextPage()' infinite-scroll-disabled='pageReviews.busy' infinite-scroll-distance='1')
+HELLO
+
+div(ng-app='myApp.services', ng-controller='PageReviewsCtrl')
+  div(infinite-scroll='pageReviews.nextPage()', infinite-scroll-disabled='pageReviews.busy', infinite-scroll-distance='1')
     div(ng-repeat='review in pageReviews.pageReviews')
       h3 {{review.title}}
       h3 {{review.comment}}
