@@ -48,7 +48,8 @@ app.delete('/api/app/:_id', api.deleteApp);
 
 // Reviews
 
-app.get('/api/app/:_id/pageReviews', api.pageReviews);
+app.get('/api/app/:_id/pageReviews', api.pageReviews)
+app.get('/api/app/:_id/pageReviews/:_after', api.pageReviews);
 app.get('/api/app/:_id/reviews', api.reviews);
 app.get('/api/review/:_id', api.review);
 app.post('/api/review', api.addReview);

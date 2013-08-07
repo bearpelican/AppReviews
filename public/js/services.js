@@ -21,7 +21,7 @@ myApp.factory('PageReviews', function($http, $routeParams) {
     PageReviews.prototype.nextPage = function() {
 	if (this.busy) return;
 	this.busy = true;
-	var url = '/api/app/' + $routeParams._id + '/pageReviews?after=' + this.after;
+	var url = '/api/app/' + $routeParams._id + '/pageReviews/' + this.after;
 	$http.get(url).success(function(data) {
 	    var pageReviews = data.pageReviews;
 	    this.pageReviews.push.apply(this.pageReviews, pageReviews);
