@@ -159,8 +159,10 @@ exports.pageReviews = function (req, res) {
     var review_id = req.params._after;
     console.log(req.params)
     App.findById(id, function (err, app) {
-//	Review.find({'appId': id}).exec(function (err, reviews) {
-	Review.find({'appId': id, id : { $gte : review_id } }).limit(10).exec(function (err, reviews) {
+	var query = {'appId' : id}
+	if (review_id != undefined) query["_id"] = { $gt : review_id };
+
+	Review.find(query).limit(10).exec(function (err, reviews) {
 	    if (err) return handleError(err);
 	    res.json({
 		pageReviews: reviews,

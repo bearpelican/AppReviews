@@ -25,7 +25,7 @@ myApp.factory('PageReviews', function($http, $routeParams) {
 	$http.get(url).success(function(data) {
 	    var pageReviews = data.pageReviews;
 	    this.pageReviews.push.apply(this.pageReviews, pageReviews);
-	    this.after = this.pageReviews[this.pageReviews.length - 1].id;
+	    this.after = this.pageReviews[this.pageReviews.length - 1]._id;
 	    this.busy = false;
 	}.bind(this));
     };
