@@ -291,7 +291,8 @@ if __name__ == '__main__':
                     (string, rc,rs) = _print_reviews(reviews, c, app)
                     rankCount += rc
                     rankSum += rs
-                print "\nTotal number of reviews: %d, avg rank: %.2f" % (rankCount, 1.0 * rankSum/rankCount)
+                if (rankCount != 0):
+                    print "\nTotal number of reviews: %d, avg rank: %.2f" % (rankCount, 1.0 * rankSum/rankCount)
             else:
                 try:
                     reviews = getReviews(appStores[country], app)
