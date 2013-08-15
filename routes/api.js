@@ -25,6 +25,19 @@ var reviewSchema = mongoose.Schema({
 
 reviewSchema.index({ "title": 1, "comment":1, "version": 1, "authorId": 1}, { unique: true });
 
+var rankingSchema = mongoose.Schema({
+    appId: { type: mongooseShcema.Types.ObjectId, ref: 'App' },
+    ranking: Number,
+    date: Date,
+    device: String,
+    genre: String,
+    chart: String
+    platform: String,
+    version: String,
+    country: String,
+    appName: { type:String, ref: 'App'},
+})
+
 
 var appSchema = mongoose.Schema({
     name: String,
@@ -126,6 +139,64 @@ exports.reviewGraph = function (req, res) {
 	
     })
 }
+
+// RANKINGS
+
+exports.ranking = function (req, res) {
+    var id = req.params._id;
+    Ranking.findById(id, function (err, ranking) {
+	res.json({
+	    ranking: ranking
+	});
+    });
+}
+
+exports.rankings = function (req, res) {
+    var id = req.params._id;
+    App.findById(id, function (err, app) {
+	Ranking.find({'appId': id}).exec(function (err, rankings) {
+	    if (err) return handleError(err);
+	    res.json({
+		rankings: rankings,
+		app: app
+	    })
+	})
+	
+    })
+}
+
+exports.latestRanking = function (req, res) {
+    var id = req.params._id;
+    App.findById(id, function (err, app) {
+	Ranking.find({'appId':id}).limit(1).exec(function (err, ranking)) {
+	    if (err) return handleError(err);
+	    res.json({
+		ranking: ranking,
+		app: app
+	    })
+	}
+    })
+}
+
+exports.addRankings = function(req, res) {
+    var rankings = req.body.comments;
+    var jsonRankings = rankings;
+    try
+    {
+	jsonRankings = JSON.parse(rankings);
+    }
+    catch (err) {}
+    jsonRankings.forEach(function(item, index) {
+	Ranking.create(item, function(err, review) {
+	    if (err) return handleError(err);
+	    ranking.save(function (err) {
+		if (err) return handleError(err);
+	    })
+	})
+    })
+    res.json(true);
+}
+
 
 // REVIEWS
 exports.review = function (req, res) {
