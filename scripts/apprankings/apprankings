@@ -31,6 +31,7 @@ import datetime
 import functools
 import re
 import sys
+import copy
 
 from collections import deque, namedtuple
 from threading import Thread
@@ -180,6 +181,7 @@ countries = {
 
 store_url = 'http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewTop'
 
+'''
 queries = {
     ('iphone','all','paid'):      '?genreId=36&id=25129&popId=30',
     ('iphone','all','free'):      '?genreId=36&id=25129&popId=27',
@@ -194,6 +196,79 @@ queries = {
     ('ipad','games','free'):      '?genreId=6014&id=25134&popId=44',
     ('ipad','games','gross'):     '?genreId=6014&id=25134&popId=46',
 }
+'''
+
+#popid
+app_charts = {
+    ('iphone', 'free'):'27',
+    ('iphone', 'paid'):'30',
+    ('iphone', 'gross'):'38',
+    ('ipad', 'free'):'44',
+    ('ipad', 'paid'):'47',
+    ('ipad', 'gross'):'46'
+    }
+
+#genreId
+app_genres = {
+    'All':'36',
+    'Books':'6018',
+    'Business':'6000',
+    'Catalogs':'6022',
+    'Education':'6017',
+    'Entertainment':'6016',
+    'Finance':'6015',
+    'Food & Drink':'6023',
+    'Games':'6014',
+    'Health & Fitness':'6013',
+    'Lifestyle':'6012',
+    'Medical':'6020',
+    'Music':'6011',
+    'Navigation':'6010',
+    'News':'6009',
+    'Newsstand':'6021',
+    'Photo & Video':'6008',
+    'Productivity':'6007',
+    'Reference':'6006',
+    'Social Networking':'6005',
+    'Sports':'6004',
+    'Travel':'6003',
+    'Utility':'6002',
+    'Weather':'6001'
+}
+
+#id
+app_sub_categories = {
+    
+    "Games/Action"          : 26341,
+    "Games/Adventure"       : 26351,
+    "Games/Arcade"          : 26361,
+    "Games/Board"           : 26371,
+    "Games/Card"            : 26381,
+    "Games/Casino"          : 26341,
+    "Games/Dice"            : 26341,
+    "Games/Educational"     : 26411,
+    "Games/Family"          : 26421,
+    "Games/Kids"            : 26431,
+    "Games/Music"           : 26441,
+    "Games/Puzzle"          : 26451,
+    "Games/Racing"          : 26461,
+    "Games/Role Playing"    : 26471,
+    "Games/Simulation"      : 26481,
+    "Games/Sports"          : 26491,
+    "Games/Strategy"        : 26501,
+    "Games/Trivia"          : 26511,
+    "Games/Word"            : 26521,
+    }
+
+queries = {}
+
+for chart in app_charts:
+    for genre in app_genres:
+        infoArray = copy.deepcopy(chart)
+        infoArray = infoArray + (genre,)
+        query = '?genreId=' + app_genres[genre] + '&popId=' + app_charts[chart]
+        queries[infoArray] = query
+
 
 app_re = re.compile(r'<div.* aria-label="(.*)" adam-id="(\d+)"')
 
