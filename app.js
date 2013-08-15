@@ -47,6 +47,12 @@ app.put('/api/app/:_id', api.editApp);
 app.delete('/api/app/:_id', api.deleteApp);
 app.get('/api/app/:_id/reviewGraph', api.reviewGraph);
 
+// Rankngs
+app.get('/api/ranking/:_id', api.ranking);
+app.get('/api/rankings/:_id', api.rankings);
+app.get('/api/latestRanking/:_id', api.latestRanking);
+app.post('/api/rankings', api.addRankings);
+
 // Reviews
 
 app.get('/api/app/:_id/pageReviews', api.pageReviews)
