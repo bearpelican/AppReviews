@@ -1,0 +1,3 @@
+div(ng-app='myApp.services', ng-controller='ReviewGraphCtrl', ng-init="reviewGraph.populateReviews()")
+  div(ng-show="reviewGraph.busy")Loading more...
+  #wordCloud(bearpelican="reviewGraph.wordArray", style="width: 550px; height: 350px; position: relative;")

@@ -104,6 +104,28 @@ exports.deleteApp = function (req, res) {
     });
 };
 
+// REVIEW GRAPH
+
+exports.reviewGraph = function (req, res) {
+    var id = req.params._id;
+    App.findById(id, function (err, app) {
+	var query = {'appId' : id}
+
+	Review.find(query, { title: 1, comment:1 }).limit(100).exec(function (err, reviews) {
+	    if (err) return handleError(err);
+	    res.json({
+		reviews: reviews,
+		app: app
+	    })
+	})
+	
+    })
+
+    App.findById(id, function (err, app) {
+	if (err) return handleError(err);
+	
+    })
+}
 
 // REVIEWS
 exports.review = function (req, res) {
@@ -124,7 +146,6 @@ exports.addReviews = function (req, res) {
 	jsonReviews = JSON.parse(reviews);
     }
     catch (err) {}
-    console.log(jsonReviews);
 /*    Review.create(jsonReviews, function (err) {
 	if (err) return handleError(err);
     })*/

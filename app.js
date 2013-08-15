@@ -45,6 +45,7 @@ app.get('/api/app/:_id', api.app);
 app.post('/api/app', api.addApp);
 app.put('/api/app/:_id', api.editApp);
 app.delete('/api/app/:_id', api.deleteApp);
+app.get('/api/app/:_id/reviewGraph', api.reviewGraph);
 
 // Reviews
 

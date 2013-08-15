@@ -58,6 +58,10 @@ function DeleteAppCtrl($scope, $http, $location, $routeParams) {
     };
 }
 
+function ReviewGraphCtrl($scope, ReviewGraph) {
+    $scope.reviewGraph = new ReviewGraph();
+};
+
 function ReviewsCtrl($scope, $http, $location, $routeParams) {
     $http.get('/api/app/' + $routeParams._id + '/reviews').
 	success(function(data) {
