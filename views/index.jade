@@ -1,19 +1,8 @@
 extends layout
 
 block body
-  div
-    h2 App Reviews
-    ul
-      li
-        a(href='/') Home
-      li
-        a(href='/addApp') Add a new app
 
-    div(ng-view)
-
-    div
-      | Angular seed app: v
-      span(app-version)
+  div(ng-view)
 
   script(src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
   script(src='js/lib/angular/angular.js')
