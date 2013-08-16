@@ -48,9 +48,9 @@ app.delete('/api/app/:_id', api.deleteApp);
 app.get('/api/app/:_id/reviewGraph', api.reviewGraph);
 
 // Rankngs
-app.get('/api/ranking/:_id', api.ranking);
-app.get('/api/rankings/:_id', api.rankings);
-app.get('/api/latestRanking/:_id', api.latestRanking);
+app.get('/api/app/ranking/:_id', api.ranking);
+app.get('/api/app/rankings/:_id', api.rankings);
+app.get('/api/app/latestRanking/:_id', api.latestRanking);
 app.post('/api/rankings', api.addRankings);
 
 // Reviews
