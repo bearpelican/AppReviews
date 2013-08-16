@@ -189,11 +189,12 @@ exports.addRankings = function(req, res) {
     }
     catch (err) {}
     jsonRankings.forEach(function(item, index) {
-	Ranking.create(item, function(err, review) {
+	Ranking.create(item, function(err, ranking) {
 	    if (err) return handleError(err);
 	    ranking.save(function (err) {
 		if (err) return handleError(err);
 	    })
+		
 	})
     })
     res.json(true);
