@@ -36,9 +36,6 @@ myApp.directive('bearpelican', function() {
     return {
 	retrict: 'A',
 	link: function (scope, element, attrs) {
-	    console.log("JDFSKLFSJ LKFJSDF LKSDJF SD");
-	    console.log("ATTRS ARE: ", attrs);
-	    console.log("Scope is: ", scope);
 	    scope.$watch("reviewGraph.busy", function(val) {
 		element.jQCloud(scope.reviewGraph.wordArray);
 	    }, true)
@@ -55,12 +52,9 @@ myApp.factory('ReviewGraph', function($http, $routeParams) {
 	this.freq = {};
 	this.wordArray = [];
 	this.busy = false;
-	this.word_list = [];
-	this.asdf = '';
     };
 
     ReviewGraph.prototype.populateReviews = function() {
-	this.asdf = 'asdfasdf';
 	if (this.busy) return;
 	this.busy = true;
 	var url = '/api/app/' + $routeParams._id + '/reviewGraph/';
@@ -74,16 +68,6 @@ myApp.factory('ReviewGraph', function($http, $routeParams) {
 	    this.freq = wordFrequency(this.comments.toString());
 	    this.wordArray = wordArray(this.freq);
 	    this.busy = false;
-
-
-	    this.word_list = [
-		{text: "Lorem", weight: 15},
-		{text: "Ipsum", weight: 9, link: "http://jquery.com/"},
-		{text: "Dolor", weight: 6},
-		{text: "Sit", weight: 7},
-		{text: "Amet", weight: 5}
-		// ...other words
-	    ];
 	}.bind(this));
     }
 
@@ -92,6 +76,8 @@ myApp.factory('ReviewGraph', function($http, $routeParams) {
 	var freq = {};
 	for (var i = 0; i < words.length; i++) {
 	    var word = words[i];
+	    if (word.length < 4)
+		continue;
 	    if (typeof freq[word] === 'number') {
 		freq[word] += 1;
 	    }

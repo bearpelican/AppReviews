@@ -122,8 +122,8 @@ exports.deleteApp = function (req, res) {
 exports.reviewGraph = function (req, res) {
     var id = req.params._id;
     App.findById(id, function (err, app) {
-	var query = {'appId' : id}
-
+//	var query = {'appId' : id}
+	var query = {'appId' : id, $or:[{country:"United States"}, {platform:"Android"}]};
 	Review.find(query, { title: 1, comment:1 }).limit(100).exec(function (err, reviews) {
 	    if (err) return handleError(err);
 	    res.json({
@@ -251,7 +251,8 @@ exports.pageReviews = function (req, res) {
     var review_id = req.params._after;
     console.log(req.params)
     App.findById(id, function (err, app) {
-	var query = {'appId' : id}
+//db.reviews.find({$or:[{country:"United States"}, {platform:"Android")
+	var query = {'appId' : id, $or:[{country:"United States"}, {platform:"Android"}]};
 	if (review_id != undefined) query["_id"] = { $gt : review_id };
 
 	Review.find(query).limit(10).exec(function (err, reviews) {
