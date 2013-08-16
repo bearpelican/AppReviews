@@ -170,10 +170,12 @@ exports.rankings = function (req, res) {
 exports.latestRanking = function (req, res) {
     var id = req.params._id;
     App.findById(id, function (err, app) {
-	Ranking.find({'appId':id}).limit(1).exec(function (err, ranking) {
+	var query = { appId: id };
+	query = { appName: app.name };
+	Ranking.find(query).limit(1).exec(function (err, ranking) {
 	    if (err) return handleError(err);
 	    res.json({
-		ranking: ranking,
+		ranking: ranking[0],
 		app: app,
 		change: 0
 	    })
@@ -242,14 +244,18 @@ exports.averageReviews = function (req, res) {
 /* result = db.reviews.aggregate( { $group : { _id : "$appId", average : { $avg : "$rating" } } }, { $match : { _id : ObjectId("51bb4c36ca6e7bf808000001") } } )
 */
 	Review.aggregate( { $group : { _id : "$appId", average : { $avg : "$rating" } } },
-			{ $match : { _id: id } },
+			/*{ $match : { _id: id } },*/
 			{ $limit : 100 },
-			  function (err, res) {
+			  function (err, aggregate) {
 			      if (err) return handleError(err);
-			      console.log(res);
-			      console.log(res.average);
+			      var avearage = 0;
+			      for (var averageReview in aggregate) {
+				  if (aggregate[averageReview]._id == id) {
+				      average = aggregate[averageReview].average;
+				  }
+			      }
 			      res.json({
-				  average: res.average,
+				  average: average,
 				  app: app,
 				  change: .2
 			      });

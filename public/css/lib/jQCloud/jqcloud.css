@@ -2,7 +2,7 @@
 
 div.jqcloud {
   font-family: "Helvetica", "Arial", sans-serif;
-  font-size: 10px;
+  font-size: 22px;
   line-height: normal;
 }
 
@@ -28,7 +28,8 @@ div.jqcloud { color: #09f; }
 div.jqcloud a { color: inherit; }
 div.jqcloud a:hover { color: #0df; }
 div.jqcloud a:hover { color: #0cf; }
-div.jqcloud span.w10 { color: #0cf; }
+/*div.jqcloud span.w10 { color: #0cf; }*/
+div.jqcloud span.w10 { color: #7B0099; }
 div.jqcloud span.w9 { color: #0cf; }
 div.jqcloud span.w8 { color: #0cf; }
 div.jqcloud span.w7 { color: #39d; }

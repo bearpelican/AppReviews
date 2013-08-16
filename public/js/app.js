@@ -8,6 +8,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives'])
 	templateUrl: 'partials/index', 
 	controller: IndexCtrl
     });
+    $routeProvider.when('/appHome/:_id', {templateUrl: 'partials/appHome', controller: AppHomeCtrl});
     $routeProvider.when('/addApp', {templateUrl: 'partials/addApp', controller: AddAppCtrl});
     $routeProvider.when('/app/:_id/reviews', {templateUrl: 'partials/reviews', controller: ReviewsCtrl});
     $routeProvider.when('/editApp/:_id', {templateUrl: 'partials/editApp', controller: EditAppCtrl});

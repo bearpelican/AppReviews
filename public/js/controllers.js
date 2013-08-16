@@ -58,6 +58,21 @@ function DeleteAppCtrl($scope, $http, $location, $routeParams) {
     };
 }
 
+function AppHomeCtrl($scope, $http, ReviewGraph, $routeParams) {
+    $scope.reviewGraph = new ReviewGraph();
+    $http.get('/api/app/' + $routeParams._id + '/averageReviews').
+	success(function(data) {
+	    $scope.average = data.average.toFixed(2);
+	    $scope.change = data.change;
+	    $scope.app = data.app;
+	});
+    $http.get('/api/app/latestRanking/' + $routeParams._id).
+	success(function(data) {
+	    $scope.ranking = data.ranking.rank;
+	    $scope.rankingChange = data.change;
+	});
+}
+
 function ReviewGraphCtrl($scope, ReviewGraph) {
     $scope.reviewGraph = new ReviewGraph();
 };
