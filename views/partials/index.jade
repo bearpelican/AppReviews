@@ -4,11 +4,7 @@ div(ng-repeat='app in apps')
   div {{app.description}}
   a(href='app/{{app._id}}/pageReviews') Page Reviews
   |  -
-  a(href='app/{{app._id}}/reviews') Show Reviews
-  |  - 
   a(href='editApp/{{app._id}}') Edit
-  |  -
-  a(href='deleteApp/{{app._id}}') Delete
   | -
   a(href='reviewGraph/{{app._id}}') Review Graph
     

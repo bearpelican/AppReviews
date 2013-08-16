@@ -26,16 +26,16 @@ var reviewSchema = mongoose.Schema({
 reviewSchema.index({ "title": 1, "comment":1, "version": 1, "authorId": 1}, { unique: true });
 
 var rankingSchema = mongoose.Schema({
-    appId: { type: mongooseShcema.Types.ObjectId, ref: 'App' },
-    ranking: Number,
+    rank: Number,
     date: Date,
     device: String,
     genre: String,
-    chart: String
+    list: String,
     platform: String,
     version: String,
     country: String,
     appName: { type:String, ref: 'App'},
+    appId: { type: mongoose.Schema.Types.ObjectId, ref: 'App' }
 })
 
 
@@ -168,18 +168,18 @@ exports.rankings = function (req, res) {
 exports.latestRanking = function (req, res) {
     var id = req.params._id;
     App.findById(id, function (err, app) {
-	Ranking.find({'appId':id}).limit(1).exec(function (err, ranking)) {
+	Ranking.find({'appId':id}).limit(1).exec(function (err, ranking) {
 	    if (err) return handleError(err);
 	    res.json({
 		ranking: ranking,
 		app: app
 	    })
-	}
+	})
     })
 }
 
 exports.addRankings = function(req, res) {
-    var rankings = req.body.comments;
+    var rankings = req.body.rankings;
     var jsonRankings = rankings;
     try
     {

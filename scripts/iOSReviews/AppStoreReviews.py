@@ -10,7 +10,6 @@
     AppStore codes are based on "appstore_reviews" by Jeremy Wohl
      - https://github.com/jeremywohl/iphone-scripts/blob/master/appstore_reviews
 '''
-import urllib2
 from elementtree import ElementTree
 import sys
 import string

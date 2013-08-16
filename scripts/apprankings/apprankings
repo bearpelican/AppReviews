@@ -32,6 +32,9 @@ import functools
 import re
 import sys
 import copy
+import urllib2
+import urllib
+import json
 
 from collections import deque, namedtuple
 from threading import Thread
@@ -180,6 +183,7 @@ countries = {
 }
 
 store_url = 'http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewTop'
+#store_url = 'https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewGrouping'
 
 '''
 queries = {
@@ -201,11 +205,11 @@ queries = {
 #popid
 app_charts = {
     ('iphone', 'free'):'27',
-    ('iphone', 'paid'):'30',
-    ('iphone', 'gross'):'38',
+#    ('iphone', 'paid'):'30',
+#    ('iphone', 'gross'):'38',
     ('ipad', 'free'):'44',
-    ('ipad', 'paid'):'47',
-    ('ipad', 'gross'):'46'
+#    ('ipad', 'paid'):'47',
+#    ('ipad', 'gross'):'46'
     }
 
 #genreId
@@ -221,9 +225,9 @@ app_genres = {
     'Games':'6014',
     'Health & Fitness':'6013',
     'Lifestyle':'6012',
-    'Medical':'6020',
+#    'Medical':'6020',
     'Music':'6011',
-    'Navigation':'6010',
+#    'Navigation':'6010',
     'News':'6009',
     'Newsstand':'6021',
     'Photo & Video':'6008',
@@ -237,7 +241,7 @@ app_genres = {
 }
 
 #id
-app_sub_categories = {
+_sub_categories = {
     
     "Games/Action"          : 26341,
     "Games/Adventure"       : 26351,
@@ -261,6 +265,8 @@ app_sub_categories = {
     }
 
 queries = {}
+
+server_url = 'http://localhost:3000/api/'
 
 for chart in app_charts:
     for genre in app_genres:
@@ -344,8 +350,8 @@ def scrape(query, storefront, details):
         name, appid = match.groups()
         item = details.copy()
         item['rank'] = rank
-        item['name'] = decode(unicode(name, 'utf-8'))
-        item['appid'] = int(appid)
+        item['appName'] = decode(unicode(name, 'utf-8'))
+        item['appId'] = int(appid)
         yield item
 
 class BoundHTTPHandler(HTTPHandler):
@@ -398,13 +404,6 @@ def main(argv):
         opener = build_opener(handler)
         install_opener(opener)
 
-    # Initialize our CSV output file.
-    args.output.write(codecs.BOM_UTF8)
-    output = csv.DictWriter(args.output,
-            ['country', 'device', 'category', 'list', 'rank', 'name',
-             'appid', 'timestamp'])
-    output.writeheader()
-
     # Create our thread pool of task workers.
     tasks = ThreadPool(args.threads)
 
@@ -420,14 +419,16 @@ def main(argv):
                                                 ranking[1], ranking[2]))
 
             # Create a new details dictionary for this batch of items.
+#output: United States,ipad,games,paid,162,Reiner Knizia's Kaleidoscope,670912343,2013-08-15 09:43
             details = {
                 'country':      country.name,
                 'device':       ranking[0],
-                'category':     ranking[1],
-                'list':         ranking[2],
-                'timestamp':    str(datetime.datetime.utcnow()),
+                'list':     ranking[1],
+                'genre':         ranking[2],
+                #'timestamp':    str(datetime.datetime.utcnow()),
+                'date': datetime.datetime.utcnow(),
+                'platform' : "iOS",
             }
-
             # Enqueue this query to our thread pool.  It will be run as soon
             # as a worker becomes available.
             tasks.add(scrape, query, country.storefront, details)
@@ -435,10 +436,20 @@ def main(argv):
         # Wait for all of this country's tasks to complete before continuing.
         tasks.wait()
 
+        rankingsJSON = []
         # Write all of the gathered results to our CSV output file.
         for item in tasks.results:
             if args.apps is None or item['appid'] in args.apps:
-                output.writerow(item)
+                print(item)
+                rankingsJSON.append(item)
+
+        data = json.dumps({"rankings" : rankingsJSON})
+        print(data)
+        request = urllib2.Request(server_url + 'rankings', data)
+        request.add_header('Content-Type', 'application/json')
+        response = urllib2.urlopen(request)
+        jsonString = response.read()
+                
 
         # Reset the results deque before moving on to the next country.
         tasks.results.clear()
