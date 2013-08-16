@@ -35,6 +35,7 @@ var rankingSchema = mongoose.Schema({
     version: String,
     country: String,
     appName: { type:String, ref: 'App'},
+    appIdString: String,
     appId: { type: mongoose.Schema.Types.ObjectId, ref: 'App' }
 })
 
