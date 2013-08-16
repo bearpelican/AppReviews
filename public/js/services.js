@@ -70,6 +70,11 @@ myApp.factory('ReviewGraph', function($http, $routeParams) {
 	    this.busy = false;
 	}.bind(this));
     }
+    
+    var blacklist = [
+	"this","it's","have", "than", "that", "when", "been", "what", "such", "ever", "with", "such" "your", "them", "show","makes","will","able"
+	
+    ]
 
     function wordFrequency(text) {
 	var words = text.toLowerCase().split(/[\s,.]+/);
@@ -87,12 +92,13 @@ myApp.factory('ReviewGraph', function($http, $routeParams) {
 	}
 	return freq;
     }
+
     
     function wordArray(freq) {
 	var array = [];
 	for (var wordKey in freq) {
 	    var frequencyNumber = freq[wordKey];
-	    if (frequencyNumber > 2) {
+	    if (frequencyNumber > 2 && !blacklist.contains(wordKey)) {
 		var textWeight = {text: wordKey, weight: frequencyNumber};
 //		console.log("Text weight: " + textWeight);
 		array.push(textWeight);
