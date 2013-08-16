@@ -1,0 +1,15 @@
+.controllerView(ng-app='myApp.services', ng-controller='AppHomeCtrl', ng-init="reviewGraph.populateReviews()")
+  .header
+  .title {{app.name}}
+  .container
+    #ranking.dashText 
+      span.rank ☰  
+      span.rankNumber{{ranking}} (
+      span.rankChange +0
+      span.rankNumber  )
+    #rating.dashText
+      span.rating ★  
+      span.ratingNumber {{average}}  (
+      span.ratingChange+{{change}}
+      span.ratingNumber)
+  #wordCloud(bearpelican="reviewGraph.wordArray")
