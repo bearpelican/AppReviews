@@ -174,7 +174,8 @@ exports.latestRanking = function (req, res) {
 	    if (err) return handleError(err);
 	    res.json({
 		ranking: ranking,
-		app: app
+		app: app,
+		change: 0
 	    })
 	})
     })
@@ -233,6 +234,29 @@ exports.addReviews = function (req, res) {
     })
     res.json(true);
 
+}
+
+exports.averageReviews = function (req, res) {
+    var id = req.params._id;
+    App.findById(id, function (err, app) {
+/* result = db.reviews.aggregate( { $group : { _id : "$appId", average : { $avg : "$rating" } } }, { $match : { _id : ObjectId("51bb4c36ca6e7bf808000001") } } )
+*/
+	Review.aggregate( { $group : { _id : "$appId", average : { $avg : "$rating" } } },
+			{ $match : { _id: id } },
+			{ $limit : 100 },
+			  function (err, res) {
+			      if (err) return handleError(err);
+			      console.log(res);
+			      console.log(res.average);
+			      res.json({
+				  average: res.average,
+				  app: app,
+				  change: .2
+			      });
+
+	})
+	
+    })
 }
 
 exports.reviews = function (req, res) {
