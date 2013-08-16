@@ -50,6 +50,7 @@ var appSchema = mongoose.Schema({
 
 var App = mongoose.model('App', appSchema);
 var Review = mongoose.model('Review', reviewSchema)
+var Ranking = mongoose.model('Ranking', rankingSchema)
 
 
 var db = mongoose.connection;
