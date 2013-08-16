@@ -364,6 +364,16 @@ class BoundHTTPHandler(HTTPHandler):
     def http_open(self, req):
         return self.do_open(self.http_class, req)
 
+
+def unix_time(dt):
+    epoch = datetime.datetime.utcfromtimestamp(0)
+    delta = dt - epoch
+    return delta.total_seconds()
+
+def unix_time_millis(dt):
+    return unix_time(dt) * 1000.0
+
+
 def main(argv):
     def source_address(s):
         m = re.match(r'([\w\.]+)(?::([0-9]+))?', s)
@@ -411,9 +421,12 @@ def main(argv):
         # Skip any unrequested countries.
         if args.countries and country_code not in args.countries:
             continue
-
+        debugCount = False
         # Run all of our ranking queries for this country.
         for ranking, query in queries.iteritems():
+            if debugCount == True:
+                continue
+            debugCount = True
             if args.verbose:
                 print('Fetching %s-%s-%s-%s' % (country_code, ranking[0],
                                                 ranking[1], ranking[2]))
@@ -426,7 +439,7 @@ def main(argv):
                 'list':     ranking[1],
                 'genre':         ranking[2],
                 #'timestamp':    str(datetime.datetime.utcnow()),
-                'date': datetime.datetime.utcnow(),
+                'date': unix_time_millis(datetime.datetime.utcnow()),
                 'platform' : "iOS",
             }
             # Enqueue this query to our thread pool.  It will be run as soon
