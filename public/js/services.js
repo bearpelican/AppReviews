@@ -74,7 +74,7 @@ myApp.factory('ReviewGraph', function($http, $routeParams) {
     var blacklist = [
 	"this","it's","have", "than", "that", "when", "been", "what", "such", "ever", "with", "such" "your", "them", "show","makes","will","able"
 	
-    ]
+    ];
 
     function wordFrequency(text) {
 	var words = text.toLowerCase().split(/[\s,.]+/);
