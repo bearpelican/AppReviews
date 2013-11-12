@@ -10,13 +10,13 @@ Setup (if you haven't already):
 #4 Install jruby- rvm install jruby-1.7.6
 #5 git clone git@github.com:bearpelican/AppReviews.git
 
-Running
+#Running
 
 #6 Run mongodb (mongod)
 #7 cd PATH/AppReviews
 #8 node app.js
 
-In browser
+#In browser
 
 #9 Navigate to localhost:3000
 #10 Add application you want to track- 
